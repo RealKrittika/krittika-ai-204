@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -16,7 +17,9 @@ app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="stat
 @app.get("/", response_class=None)
 async def index(request: Request):
     """Render the single-page UI."""
-    return templates.TemplateResponse("index.html", {"request": request})
+    # Read the `test` env variable (set via App Service configuration later)
+    test_value = os.environ.get("test")
+    return templates.TemplateResponse("index.html", {"request": request, "test": test_value})
 
 
 @app.get("/api/ping")

@@ -2,6 +2,10 @@
 
 {% block content %}
   <section class="card">
+    <h3>Configuration</h3>
+    <p>test: {% if test is not none %}{{ test }}{% else %}<em>not set</em>{% endif %}</p>
+  </section>
+  <section class="card">
     <p>Click the button to call <code>/api/ping</code> and show the response below.</p>
     <button id="pingBtn">Ping API</button>
     <div id="result" class="result"></div>
